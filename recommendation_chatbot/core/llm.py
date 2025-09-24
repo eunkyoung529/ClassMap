@@ -1,45 +1,4 @@
 # 기능 : 검색 결과를 사람이 읽기 좋은 텍스트로 포맷. (원하면 LLM 요약으로 교체)
-# from typing import List
-# from .store import Item
-
-# def render_plain(query: str, items: List[Item]) -> str:
-#     lines = [f'질문: "{query}"', "추천 결과:"]
-#     for i, it in enumerate(items, 1):
-#         lines.append(f"{i}. {it.title} - {it.host or ''} (마감: {it.deadline or '미정'})")
-#         if it.link:
-#             lines.append(f"   {it.link}")
-#     return "\n".join(lines)
-
-
-# 잘 작동되는 코드
-
-# from __future__ import annotations
-# import textwrap
-# import pandas as pd
-
-# def format_reply(user_name: str, user_major: str, df: pd.DataFrame) -> str:
-#     if df is None or len(df) == 0:
-#         return f"{user_major} 관련 추천을 아직 찾지 못했어요. 관심 키워드를 조금 더 자세히 말해줄래요? 예: 'AI 해커톤', '웹 백엔드', '정보보안' 등"
-
-#     top = df.iloc[0]
-#     bullets = []
-#     for _, r in df.iterrows():
-#         dl = r.get("deadline") if r.get("deadline") else "상시/미정"
-#         bullets.append(f"- {r['title']}  · 별점 {r['stars']}/5.0  · 주최: {r['host']}  · 마감일: {dl}")
-
-#     reason = "개발 실력 향상과 네트워킹에 도움이 되며, 사용자의 흥미 키워드와 높은 관련도를 보여요."
-#     reply = textwrap.dedent(f"""
-#     네, 알겠습니다. {user_major} 관련 공모전/대외활동 추천 리스트입니다:
-
-#     {chr(10).join(bullets)}
-
-#     이 중에서 가장 유명한(별점이 가장 높은) 활동은 **{top['title']}** 입니다.
-#     추천 이유: {reason}
-#     링크: {top.get('link','정보 없음')}
-#     """).strip()
-#     return reply
-
-
 import os
 import json
 import textwrap
