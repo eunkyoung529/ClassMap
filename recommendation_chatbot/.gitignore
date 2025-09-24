@@ -1,0 +1,46 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.dist/
+.build/
+.env
+.venv/
+venv/
+env/
+
+# --- OS / IDE ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Logs ---
+logs/
+*.log
+
+# --- Data (_generated or sensitive) ---
+# 크롤링/가공 산출물과 벡터 인덱스는 리포에 올리지 않는게 안전
+recommendation_chatbot/data/vector_index/
+recommendation_chatbot/data/taxonomy/majors_jobs_map.json
+recommendation_chatbot/data/*.parquet
+recommendation_chatbot/data/*.sqlite
+recommendation_chatbot/data/*.db
+
+# 실제 운영 데이터/키/자격증명
+*.key
+*.pem
+*.crt
+*.p12
+*.json
+!.keep
+
+# 사용자 로컬 CSV (예: 공모전_200개.csv) — 샘플만 커밋하고 실제는 무시 권장
+*공모전_*.csv
+*대외활동_*.csv
+recommendation_chatbot/data/ratings.csv
+
+# --- Notebooks (선택) ---
+*.ipynb_checkpoints/
