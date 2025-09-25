@@ -24,3 +24,11 @@
 feat member: 회원 가입 기능 구현
 fix auth: 로그인 시 인증 오류 수정
 ```
+
+
+'''
+1. .env에 azure api 키 입력
+2. (jsonl 파일이 없다는 가정하에) loader and chunking에 있는 파일 다 돌리기
+3. jsonl 파일 두개 생성되면 아래 명령어 터미널에 입력
+실행 명령어: python -m chatbot.rag_chatbot --chunks syllabus_chunks.jsonl --query "나는 디지털소프트웨어공학부 학생인데 컴퓨터비전 강의 추천해줘" --chat
+'''
