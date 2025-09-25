@@ -26,9 +26,9 @@ fix auth: 로그인 시 인증 오류 수정
 ```
 
 
-'''
+
 실행방법
-'''
+
 
 1. .env에 azure api 키 입력
 2. (jsonl 파일이 없다는 가정하에) loader and chunking에 있는 파일 다 돌리기
