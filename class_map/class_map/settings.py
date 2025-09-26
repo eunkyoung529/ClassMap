@@ -123,3 +123,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 수강평 CSV 파일 경로
+CSV_REVIEWS_PATH = BASE_DIR / "main" / "data" / "duksung_everytime_reviews.csv"
