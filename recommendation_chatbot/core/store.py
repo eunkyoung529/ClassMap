@@ -1,66 +1,3 @@
-# # 기능 : (임시) CSV에서 공모전/대외활동 아이템 로딩.
-# # 나중에 Django/DB로 바꿔도 이 레이어만 교체하면 됨.
-# # + 별점까지 추가함
-
-# import pandas as pd
-# from dateutil import parser
-# from .config import CONTESTS_CSV
-
-# COLUMN_MAP = {
-#     "제목": "title",
-#     "주최": "host",
-#     "마감일": "deadline",
-#     "분야": "field",
-#     "링크": "link",
-#     "내용": "content",
-# }
-
-# def _norm(s: str) -> str:
-#     if pd.isna(s): return ""
-#     return " ".join(str(s).strip().split())
-
-# def _parse_deadline(x: str):
-#     x = _norm(x)
-#     if not x: return None
-#     if any(k in x for k in ["상시", "미정", "수시", "~"]): return None
-#     try:
-#         d = parser.parse(x, dayfirst=False, yearfirst=True).date()
-#         return d.isoformat()
-#     except Exception:
-#         return None
-
-# def load_contests(path: str | None = None) -> pd.DataFrame:
-#     csv_path = path or CONTESTS_CSV
-#     df = pd.read_csv(csv_path, encoding="utf-8")
-#     df = df.rename(columns={c: COLUMN_MAP.get(c, c) for c in df.columns})
-#     for c in ["title","host","deadline","field","link","content"]:
-#         if c not in df.columns: df[c] = ""
-#         df[c] = df[c].apply(_norm)
-#     df["deadline"] = df["deadline"].apply(_parse_deadline)
-
-#     # 가중치가 반영된 검색 텍스트: title*2 + field*1.5 + content + host
-#     df["text"] = (
-#         (df["title"].fillna("") + " ") * 2
-#         + (df["field"].fillna("") + " ") * 1
-#         + df["content"].fillna("") + " "
-#         + df["host"].fillna("")
-#     ).str.lower()
-
-#     return df
-
-
-
-
-# -*- coding: utf-8 -*-
-# 기능: 공모전/대외활동 CSV를 로딩해 내부 Item 형태로 변환
-
-# -*- coding: utf-8 -*-
-# 기능: 공모전/대외활동 CSV를 로딩해 내부 Item 형태로 변환
-# - 인코딩 자동 처리(utf-8/utf-8-sig/cp949/euc-kr)
-# - 구분자 자동 감지(csv.Sniffer) ⇢ 콤마/세미콜론/탭 모두 대응
-# - 헤더명 정규화(공백/BOM/대소문자) 및 유연 매핑
-# - 카테고리 분해는 re.split 사용
-
 from __future__ import annotations
 import csv
 import hashlib
@@ -224,9 +161,3 @@ def merge_ratings(items: List[Item], ratings_csv: str) -> None:
     for it in items:
         if it.title in rmap and it.rating is None:
             it.rating = rmap[it.title]
-
-
-
-
-
-

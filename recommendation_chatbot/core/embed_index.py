@@ -1,27 +1,3 @@
-# # 기능 : 문서 임베딩 및 Chroma 벡터 인덱스 생성/검색.
-# import os, pickle
-# import pandas as pd
-# from sklearn.feature_extraction.text import TfidfVectorizer
-# from .config import VECTOR_DIR, INDEX_PKL
-
-# def build_index(df: pd.DataFrame) -> None:
-#     os.makedirs(VECTOR_DIR, exist_ok=True)
-#     vec = TfidfVectorizer(max_features=50000, ngram_range=(1,2), min_df=1)
-#     X = vec.fit_transform(df["text"].tolist())
-#     payload = {
-#         "vectorizer": vec,
-#         "matrix": X,
-#         "records": df[["title","host","deadline","field","link","content","text"]].reset_index(drop=True),
-#     }
-#     with open(INDEX_PKL, "wb") as f:
-#         pickle.dump(payload, f)
-
-# def load_index():
-#     with open(INDEX_PKL, "rb") as f:
-#         return pickle.load(f)
-
-
-# -*- coding: utf-8 -*-
 # 기능: Azure 임베딩을 사용한 경량 벡터 인덱스(JSON). 200~수천 건 규모에 적합.
 
 from __future__ import annotations
@@ -36,7 +12,6 @@ from .store import Item
 INDEX_FILE = "items.index.json"
 
 def _client() -> OpenAI:
-    # Azure OpenAI: 환경변수 기반 설정
     api_key = os.getenv("AZURE_OPENAI_API_KEY")
     endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
     if not api_key or not endpoint:
@@ -101,7 +76,6 @@ class SimpleVectorDB:
             raise RuntimeError("인덱스가 로드되지 않았습니다. load() 또는 build()를 호출하세요.")
         qv = np.array(_embed([query])[0], dtype=np.float32)
         sims = self.vecs @ qv / ((np.linalg.norm(self.vecs, axis=1) * (np.linalg.norm(qv) or 1e-8)) + 1e-8)
-        # 유사도 내림차순
         idx = np.argsort(-sims)[:top_k]
         return [(self.ids[i], float(sims[i])) for i in idx]
 
