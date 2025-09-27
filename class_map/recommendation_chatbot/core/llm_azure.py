@@ -9,7 +9,7 @@ def _client() -> Optional[OpenAI]:
     endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
     deploy = os.getenv("AZURE_OPENAI_CHAT_DEPLOYMENT")
     if not (api_key and endpoint and deploy):
-        return None
+        return None 
     return OpenAI(api_key=api_key, base_url=f"{endpoint}/openai/deployments/{deploy}")
 
 def render_plain(user: str, query: str, items: List[Item], famous: Optional[Item], prefs, hide_deadline: bool = False) -> str:

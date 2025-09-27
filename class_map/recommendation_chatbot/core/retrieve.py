@@ -9,7 +9,7 @@ from .store import Item
 from .majors import MajorEntry, expand_terms_for_major
 from .preference import extract_preferences, score_by_preferences
 
-ARCH_CORE_ANY = [
+ARCH_CORE_ANY = [   
     "건축", "설계", "현상설계", "도면", "bim", "cad", "포트폴리오",
     "렌더링", "모형", "조형", "스튜디오", "마스터플랜", "건축공모"
 ]
@@ -174,7 +174,7 @@ def hybrid_search(
         it = id_map[i]
         b = bm25_scores.get(i, 0.0)
         c = chroma_scores.get(i, 0.0)
-        sim = w_bm25 * b + w_chroma * c
+        sim = w_bm25 * b + w_chroma * c 
         score = 0.3 - sim
         score *= kw_bonus.get(i, 1.0)
         score *= title_bonus.get(i, 1.0)

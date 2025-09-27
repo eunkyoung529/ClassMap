@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+load_dotenv()  # .env 파일에서 환경 변수 로드
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -124,5 +127,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# 수강평 CSV 파일 경로
 CSV_REVIEWS_PATH = BASE_DIR / "main" / "data" / "duksung_everytime_reviews.csv"
+ITEMS_CSV_PATH = BASE_DIR / "recommendation_chatbot" / "data" / "items.csv"
+MAJORS_DATA_DIR = BASE_DIR / "recommendation_chatbot" / "data" / "taxonomy"
+CHROMA_INDEX_PATH = BASE_DIR / "recommendation_chatbot" / "data" / "vector_index"
