@@ -56,7 +56,7 @@ def hybrid_search(
     dense_scores = [1 - d for d in dense_scores] if dense_scores else [0.0] * len(dense_ids)
 
     # BM25 검색
-    from retriever.bm25 import bm25_search
+    from ..retriever.bm25 import bm25_search
     bm25_res = bm25_search(bm25, tokenized_corpus, query, top_k=max(top_k*3, 50))
     bm25_dict = {i: s for i, s in bm25_res}
 

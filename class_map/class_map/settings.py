@@ -131,3 +131,13 @@ CSV_REVIEWS_PATH = BASE_DIR / "main" / "data" / "duksung_everytime_reviews.csv"
 ITEMS_CSV_PATH = BASE_DIR / "recommendation_chatbot" / "data" / "items.csv"
 MAJORS_DATA_DIR = BASE_DIR / "recommendation_chatbot" / "data" / "taxonomy"
 CHROMA_INDEX_PATH = BASE_DIR / "recommendation_chatbot" / "data" / "vector_index"
+
+
+# --- 강의 추천 챗봇 설정 ---
+LECTURE_DATA_DIR = BASE_DIR / "recommendation_lecture"
+LECTURE_CHUNKS_PATH = LECTURE_DATA_DIR / "syllabus_chunks.jsonl"
+LECTURE_CHROMA_PATH = LECTURE_DATA_DIR / "chroma_db"
+
+# Hugging Face 모델 이름 (코드에 명시된 기본값 사용)
+EMBED_MODEL = "BAAI/bge-m3"
+RERANK_MODEL = "Dongjin-kr/ko-reranker"

@@ -2,12 +2,12 @@ import argparse
 import json
 import os
 from dotenv import load_dotenv
-from retriever.data_loader import load_chunks, build_parent_map
-from retriever.bm25 import build_bm25_index
-from retriever.dense import STEmbeddingFunction, get_or_create_collection
-from retriever.hybrid import hybrid_search
-from chatbot.gpt_client import create_azure_client
-from chatbot.generator import generate_answer
+from ..retriever.data_loader import load_chunks, build_parent_map
+from ..retriever.bm25 import build_bm25_index
+from ..retriever.dense import STEmbeddingFunction, get_or_create_collection
+from ..retriever.hybrid import hybrid_search
+from .gpt_client import create_azure_client
+from .generator import generate_answer
 
 import chromadb
 from sentence_transformers import CrossEncoder
@@ -23,7 +23,7 @@ def build_dense_index(chunks, persist_dir, model_name):
 
     if col.count() == 0:
         ids, docs, metadatas = [], [], []
-        from retriever.hybrid import extract_metadata
+        from ..retriever.hybrid import extract_metadata
         for idx, c in enumerate(chunks):
             cid = c.get("chunk_id", str(idx))
             ids.append(cid)
