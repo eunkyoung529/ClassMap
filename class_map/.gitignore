@@ -29,6 +29,9 @@ recommendation_chatbot/data/*.parquet
 recommendation_chatbot/data/*.sqlite
 recommendation_chatbot/data/*.db
 
+# [추가됨] SQLite3 데이터베이스 파일
+*.sqlite3
+
 # 실제 운영 데이터/키/자격증명
 *.key
 *.pem
@@ -44,3 +47,8 @@ recommendation_chatbot/data/ratings.csv
 
 # --- Notebooks (선택) ---
 *.ipynb_checkpoints/
+
+# --- PDF 데이터 ---
+# [추가됨]
+*.pdf
+강의계획서 자료/
