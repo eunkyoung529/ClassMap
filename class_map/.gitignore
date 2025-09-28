@@ -37,8 +37,6 @@ recommendation_chatbot/data/*.db
 # recommendation_lecture 데이터
 recommendation_lecture/chroma_db/
 
-recommendation_lecture/
-
 # SQLite3 데이터베이스 파일
 *.sqlite3
 
