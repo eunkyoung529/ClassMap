@@ -1,3 +1,8 @@
+# --- Web Backend ---
+Django>=4.2
+djangorestframework>=3.14
+djangorestframework-simplejwt>=5.3
+
 # --- Core AI / LLM Libraries ---
 chromadb>=0.5.11
 openai>=1.52.0
