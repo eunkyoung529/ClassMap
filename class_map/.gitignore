@@ -26,12 +26,16 @@ Thumbs.db
 logs/
 *.log
 
-# --- Data ---
+# --- recommendation_chatbot 데이터 ---
 recommendation_chatbot/data/vector_index/
 recommendation_chatbot/data/taxonomy/majors_jobs_map.json
 recommendation_chatbot/data/*.parquet
 recommendation_chatbot/data/*.sqlite
 recommendation_chatbot/data/*.db
+
+
+# recommendation_lecture 데이터
+recommendation_lecture/chroma_db/
 
 recommendation_lecture/
 
@@ -46,7 +50,7 @@ recommendation_lecture/
 *.json
 !.keep
 
-# --- 사용자 로컬 CSV ---
+# --- 로컬 CSV ---
 *공모전_*.csv
 *대외활동_*.csv
 recommendation_chatbot/data/ratings.csv
@@ -58,8 +62,6 @@ recommendation_chatbot/data/ratings.csv
 *.pdf
 강의계획서 자료/
 
-# recommendation_lecture 앱 내부 데이터
-recommendation_lecture/chroma_db/
 
 # collectstatic으로 생성되는 정적 파일 폴더
 staticfiles/
