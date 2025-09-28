@@ -18,4 +18,8 @@ urlpatterns = [
     path('auth/login/',    CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),  # 커스텀 로그인
     path('auth/refresh/',  TokenRefreshView.as_view(),          name='token_refresh'),
     path('auth/me/',       MeView.as_view(),                    name='auth-me'),
-]
+    
+    # 챗봇 히스토리
+    path('chat-histories/activities/', views.ActivityChatHistoryView.as_view(), name='history_activity_chat'),
+    path('chat-histories/lectures/',  views.LectureChatHistoryView.as_view(),  name='history_lecture_chat'),
+] 
