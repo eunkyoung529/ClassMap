@@ -6,7 +6,12 @@ __pycache__/
 *.egg-info/
 .dist/
 .build/
+
+# --- 환경변수 ---
 .env
+*.env
+
+# --- 가상환경 ---
 .venv/
 venv/
 env/
@@ -21,18 +26,21 @@ Thumbs.db
 logs/
 *.log
 
-# --- Data (_generated or sensitive) ---
-# 크롤링/가공 산출물과 벡터 인덱스는 리포에 올리지 않는게 안전
+# --- recommendation_chatbot 데이터 ---
 recommendation_chatbot/data/vector_index/
 recommendation_chatbot/data/taxonomy/majors_jobs_map.json
 recommendation_chatbot/data/*.parquet
 recommendation_chatbot/data/*.sqlite
 recommendation_chatbot/data/*.db
 
-# [추가됨] SQLite3 데이터베이스 파일
+
+# recommendation_lecture 데이터
+recommendation_lecture/chroma_db/
+
+# SQLite3 데이터베이스 파일
 *.sqlite3
 
-# 실제 운영 데이터/키/자격증명
+# --- 실제 운영 데이터/키/자격증명 ---
 *.key
 *.pem
 *.crt
@@ -40,15 +48,20 @@ recommendation_chatbot/data/*.db
 *.json
 !.keep
 
-# 사용자 로컬 CSV (예: 공모전_200개.csv) — 샘플만 커밋하고 실제는 무시 권장
+# --- 로컬 CSV ---
 *공모전_*.csv
 *대외활동_*.csv
 recommendation_chatbot/data/ratings.csv
 
-# --- Notebooks (선택) ---
+# Notebooks
 *.ipynb_checkpoints/
 
 # --- PDF 데이터 ---
-# [추가됨]
 *.pdf
 강의계획서 자료/
+
+
+# collectstatic으로 생성되는 정적 파일 폴더
+staticfiles/
+# 사용자가 업로드하는 미디어 파일 폴더
+media/
