@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
-from .models import LectureReview
-from .login import RegisterSerializer
+from .models import LectureReview, ActivityChatHistory, LectureChatHistory
+from .login import RegisterSerializer, ActivityChatHistorySerializer, LectureChatHistorySerializer
+from rest_framework import status
 from django.contrib.auth.models import User
 from rest_framework import generics, permissions
 from rest_framework.views import APIView
@@ -72,3 +73,42 @@ class MeView(APIView):
             "plan": getattr(p, "plan", "free"),
             "pro_badge": getattr(p, "has_pro_badge", False),
         })
+    
+
+
+
+# 공모전/대회 챗봇 히스토리 API 뷰
+class ActivityChatHistoryView(APIView):
+    permission_classes = [permissions.IsAuthenticated] # 토큰 인증
+
+    def get(self, request):
+        # 데이터베이스에서 현재 사용자의 기록만 필터링해서 가져오기
+        histories = ActivityChatHistory.objects.filter(user=request.user)
+        # 시리얼라이저를 통해 데이터를 JSON으로 변환
+        serializer = ActivityChatHistorySerializer(histories, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        # 클라이언트가 보낸 데이터를 시리얼라이저로 검증
+        serializer = ActivityChatHistorySerializer(data=request.data)
+        
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user) # 현재 user정보와 함께 저장
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+# 강의 추천 챗봇 히스토리 API 뷰
+class LectureChatHistoryView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        histories = LectureChatHistory.objects.filter(user=request.user)
+        serializer = LectureChatHistorySerializer(histories, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        serializer = LectureChatHistorySerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)

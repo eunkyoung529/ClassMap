@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
-from .models import Profile, Plan
+from .models import ActivityChatHistory, LectureChatHistory, Profile, Plan
 
 # 회원가입 시 입력: 아이디(username), 이름(name), 비밀번호/확인, 결제금액(paid_amount)
 # paid_amount가 10,000원 이상이면 Pro, 그 미만/미입력은 일반로 저장.
@@ -43,3 +43,15 @@ class RegisterSerializer(serializers.ModelSerializer):
         profile.save(update_fields=["plan"])
 
         return user
+ 
+# 공모전/대회 추천 챗봇 시리얼라이저
+class ActivityChatHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ActivityChatHistory
+        fields = ["id", "query", "response", "created_at"]
+
+# 강의 추천 챗봇 시리얼라이저
+class LectureChatHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LectureChatHistory
+        fields = ["id", "query", "response", "created_at"]
