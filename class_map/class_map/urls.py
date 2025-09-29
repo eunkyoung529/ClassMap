@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('', include('main.web_urls')), #웹 
+
     path('admin/', admin.site.urls),
     path('api/', include('main.urls')),
     path('api/activities-recommendation/', include('recommendation_chatbot.urls')),

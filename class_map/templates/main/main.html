@@ -1,0 +1,76 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ClassMap+</title>
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+  {% include 'main/_header.html' %}
+
+  <div class="snap-container">
+    <!-- [1] Hero -->
+    <section class="section" id="hero">
+      <div class="inner hero">
+        <div>
+          <h1>ClassMap+</h1>
+          <p>공모전·대외활동, 맞춤 강의 추천, 수강평 모아보기까지 한 번에!<br>
+            학생들의 진로 길잡이가 되어주는 올인원 캠퍼스 플랫폼</p>
+          <p><a class="btn" href="/signup/">지금 시작하기</a></p>
+        </div>
+        <div>
+          <img src="{% static 'images/main.png' %}" alt="ClassMap+ Hero">
+        </div>
+      </div>
+    </section>
+
+    <!-- [2] Features -->
+    <section class="section" id="features">
+      <div class="inner">
+        <h2>무엇이 달라요?</h2>
+        <div class="features" style="margin-top:16px;">
+          <div class="card"><h3>맞춤 강의 추천</h3><p>내 전공/목표에 맞춘 강의를 뽑아줘요.</p></div>
+          <div class="card"><h3>공모전/대회 큐레이션</h3><p>관심사 기반으로 딱 맞는 대회를 추천.</p></div>
+          <div class="card"><h3>수강평 모아보기</h3><p>선배들의 리뷰를 한 곳에서 확인.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- [3] Pricing -->
+    <section class="section" id="pricing">
+      <div class="inner">
+        <h2>요금제</h2>
+        <div class="features" style="margin-top:16px;">
+          <div class="card">
+            <h3>일반 (Free)</h3>
+            <p class="muted">필수 기능 이용</p>
+            <p class="muted">추천 개수 일부 제한</p>
+            <p><a class="btn" href="/signup/">무료로 시작</a></p>
+          </div>
+          <div class="card">
+            <h3>Pro</h3>
+            <p class="muted">무제한 추천/배지 제공</p>
+            <p class="muted">추가 기능 우선 제공</p>
+            <p><a class="btn" href="/signup/pro/">Pro로 가입</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- [4] CTA -->
+    <section class="section" id="cta">
+      <div class="inner cta">
+        <h2>지금 바로 시작해요</h2>
+        <p class="muted" style="margin:8px 0 18px;">아이디와 비밀번호만으로 간단하게 로그인/가입</p>
+        <p>
+          <a class="btn" href="/signup/">회원가입</a>
+          &nbsp;&nbsp;
+          <a class="btn" href="/login/">로그인</a>
+        </p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

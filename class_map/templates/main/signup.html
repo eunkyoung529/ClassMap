@@ -1,0 +1,76 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>회원가입 - ClassMap+</title>
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+  {% include 'main/_header.html' %}
+
+  <div class="page">
+    <h2>회원가입 (일반)</h2>
+    <p class="muted">아이디/이름/비밀번호만 있으면 바로 가입할 수 있어요.</p>
+
+    <form class="form" id="signupForm">
+      <div class="row">
+        <label>아이디</label>
+        <input type="text" name="username" required autocomplete="username">
+      </div>
+      <div class="row">
+        <label>이름</label>
+        <input type="text" name="name" required autocomplete="name">
+      </div>
+      <div class="row">
+        <label>이메일 (선택)</label>
+        <input type="email" name="email" autocomplete="email">
+      </div>
+      <div class="row">
+        <label>비밀번호</label>
+        <input type="password" name="password" required autocomplete="new-password">
+      </div>
+      <div class="row">
+        <label>비밀번호 확인</label>
+        <input type="password" name="password2" required autocomplete="new-password">
+      </div>
+      <button type="submit">가입하기</button>
+      <p class="hint">Pro로 가입하려면 <a href="/signup/pro/">여기</a>를 클릭하세요.</p>
+      <div id="signupMsg" class="hint"></div>
+    </form>
+  </div>
+
+<script>
+const form = document.getElementById('signupForm');
+const msg = document.getElementById('signupMsg');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.textContent = '가입 처리 중...';
+  const payload = {
+    username: form.username.value.trim(),
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    password: form.password.value,
+    password2: form.password2.value
+  };
+  try {
+    const res = await fetch('/api/auth/register/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (res.status !== 201) {
+      throw new Error(data.detail || JSON.stringify(data));
+    }
+    msg.textContent = '가입 완료! 이제 로그인 하세요.';
+    setTimeout(()=> location.href='/login/', 800);
+  } catch (err) {
+    msg.textContent = '에러: ' + err.message;
+  }
+});
+</script>
+</body>
+</html>

@@ -112,3 +112,23 @@ class LectureChatHistoryView(APIView):
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+
+
+
+# templates 프론트 UI
+from django.shortcuts import render
+
+def main_page(request):
+    return render(request, 'main/main.html')
+
+def login_page(request):
+    return render(request, 'main/login.html')
+
+def signup_page(request):
+    # 일반 회원가입
+    return render(request, 'main/signup.html', context={'is_pro': False})
+
+def signup_pro_page(request):
+    # Pro 회원가입 (UI만 다르고 호출은 동일)
+    return render(request, 'main/signup_pro.html', context={'is_pro': True})

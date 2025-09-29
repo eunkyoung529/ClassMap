@@ -1,0 +1,74 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro 가입 - ClassMap+</title>
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+  {% include 'main/_header.html' %}
+
+  <div class="page">
+    <h2>Pro 회원가입</h2>
+    <p class="muted">Pro는 추천 무제한 + Pro 뱃지가 제공됩니다. 지금은 계정만 만들고, 결제 후 자동 승급됩니다.</p>
+
+    <form class="form" id="signupProForm">
+      <div class="row">
+        <label>아이디</label>
+        <input type="text" name="username" required autocomplete="username">
+      </div>
+      <div class="row">
+        <label>이름</label>
+        <input type="text" name="name" required autocomplete="name">
+      </div>
+      <div class="row">
+        <label>이메일 (선택)</label>
+        <input type="email" name="email" autocomplete="email">
+      </div>
+      <div class="row">
+        <label>비밀번호</label>
+        <input type="password" name="password" required autocomplete="new-password">
+      </div>
+      <div class="row">
+        <label>비밀번호 확인</label>
+        <input type="password" name="password2" required autocomplete="new-password">
+      </div>
+      <button type="submit">Pro로 가입</button>
+      <p class="hint">일반으로 가입하려면 <a href="/signup/">여기</a>를 클릭하세요.</p>
+      <div id="signupProMsg" class="hint"></div>
+    </form>
+  </div>
+
+<script>
+const form = document.getElementById('signupProForm');
+const msg = document.getElementById('signupProMsg');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.textContent = '가입 처리 중...';
+  const payload = {
+    username: form.username.value.trim(),
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    password: form.password.value,
+    password2: form.password2.value
+  };
+  try {
+    const res = await fetch('/api/auth/register/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (res.status !== 201) throw new Error(data.detail || JSON.stringify(data));
+    msg.textContent = '계정 생성 완료! 결제 후 자동으로 Pro로 승급됩니다.';
+    setTimeout(()=> location.href='/login/', 900);
+  } catch (err) {
+    msg.textContent = '에러: ' + err.message;
+  }
+});
+</script>
+</body>
+</html>

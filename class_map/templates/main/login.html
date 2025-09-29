@@ -1,0 +1,64 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>로그인 - ClassMap+</title>
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+  {% include 'main/_header.html' %}
+
+  <div class="page">
+    <h2>로그인</h2>
+    <p class="muted">아이디와 비밀번호를 입력하세요.</p>
+
+    <form class="form" id="loginForm">
+      <div class="row">
+        <label>아이디</label>
+        <input type="text" name="username" required autocomplete="username">
+      </div>
+      <div class="row">
+        <label>비밀번호</label>
+        <input type="password" name="password" required autocomplete="current-password">
+      </div>
+      <button type="submit">로그인</button>
+      <p class="hint">계정이 없나요? <a href="/signup/">회원가입</a></p>
+      <div id="loginMsg" class="hint"></div>
+    </form>
+  </div>
+
+<script>
+const form = document.getElementById('loginForm');
+const msg = document.getElementById('loginMsg');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.textContent = '로그인 중...';
+  const username = form.username.value.trim();
+  const password = form.password.value;
+
+  try {
+    const res = await fetch('/api/auth/login/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || '로그인 실패');
+
+    // 토큰 저장
+    localStorage.setItem('access', data.access);
+    localStorage.setItem('refresh', data.refresh);
+    localStorage.setItem('username', data.username);
+    localStorage.setItem('plan', data.plan);
+    // 메인으로 이동
+    location.href = '/';
+  } catch (err) {
+    msg.textContent = err.message;
+  }
+});
+</script>
+</body>
+</html>

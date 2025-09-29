@@ -1,0 +1,106 @@
+/* ========== 기본 ========== */
+:root {
+    --bg: #0d0d0f;
+    --fg: #f8f8fb;
+    --muted: #b8b8c7;
+    --brand: #7c3aed;     /* 보라 */
+    --brand-2: #ec4899;   /* 핑크 */
+    --card: #16161a;
+    --border: #23232a;
+  }
+  
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; color: var(--fg); background: var(--bg); }
+  
+  /* ========== 헤더 ========== */
+  .header {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(6px);
+    background: rgba(13,13,15,0.6);
+    border-bottom: 1px solid var(--border);
+  }
+  .header .wrap {
+    max-width: 1100px; margin: 0 auto; padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .header a.logo { color: #fff; font-weight: 800; text-decoration: none; font-size: 20px; letter-spacing: .2px; }
+  .header nav a {
+    color: var(--fg); text-decoration: none; margin-left: 16px; font-size: 14px;
+  }
+  .header nav a.btn {
+    padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--card);
+  }
+  .header nav a.btn-primary {
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    border: none; color: white;
+  }
+  
+  /* ========== 메인: 스크롤 스냅 ========== */
+  .snap-container {
+    height: calc(100vh - 56px); /* 헤더 높이 보정 */
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+  }
+  .section {
+    min-height: calc(100vh - 56px);
+    display: grid; place-items: center;
+    padding: 60px 20px;
+    border-bottom: 1px solid var(--border);
+    scroll-snap-align: start;
+    background: linear-gradient(180deg, rgba(124,58,237,0.06), rgba(236,72,153,0.06) 60%, transparent);
+  }
+  .section .inner { max-width: 1100px; width: 100%; }
+  
+  .hero {
+    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px;
+    align-items: center;
+  }
+  .hero h1 { font-size: 52px; margin: 0 0 16px; }
+  .hero p { color: var(--muted); font-size: 18px; margin: 0 0 24px; line-height: 1.6; }
+  .hero img {
+    width: 100%; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,.35);
+    object-fit: cover;
+  }
+  
+  .features { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
+  .card h3 { margin: 0 0 8px; }
+  .card p { margin: 0; color: var(--muted); }
+  
+  .cta {
+    text-align: center;
+  }
+  .cta .btn {
+    display: inline-block; text-decoration: none; color: white; font-weight: 700;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    padding: 14px 20px; border-radius: 12px;
+  }
+  
+  /* ========== 폼 공통 ========== */
+  .page {
+    max-width: 420px; margin: 60px auto; padding: 24px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  }
+  .page h2 { margin: 0 0 12px; }
+  .page p.muted { margin-top: 6px; color: var(--muted); }
+  
+  .form .row { display: grid; gap: 6px; margin-bottom: 14px; }
+  .form label { font-size: 13px; color: var(--muted); }
+  .form input[type="text"], .form input[type="password"], .form input[type="email"] {
+    background: #111218; color: #e8e8f1; border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 12px; outline: none;
+  }
+  .form button {
+    width: 100%; padding: 12px; border-radius: 10px; border: none; color: #fff; font-weight: 700;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    cursor: pointer;
+  }
+  .form .hint { font-size: 12px; color: var(--muted); }
+  
+  /* 반응형 */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .features { grid-template-columns: 1fr; }
+  }
+  
