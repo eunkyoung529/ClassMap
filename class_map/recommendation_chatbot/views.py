@@ -71,3 +71,11 @@ def chatbot_api(request):
     except Exception as e:
         print(f"챗봇 처리 중 에러 발생: {e}")
         return JsonResponse({'error': 'An internal error occurred.'}, status=500)
+
+
+
+# templates 프론트 UI
+from django.shortcuts import render
+
+def chatbot_page(request):
+    return render(request, 'recommendation_chatbot/chatbot.html')
