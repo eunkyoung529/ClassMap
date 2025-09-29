@@ -1,12 +1,15 @@
+{% load static %}
 <header class="header">
     <div class="wrap">
       <a href="/" class="logo">ClassMap+</a>
-      <nav>
+      <nav id="userBadge">
         <a href="/#features">기능</a>
         <a href="/#pricing">요금제</a>
+        <!-- <a class="btn" href="/signup/">회원가입</a>
+        <a class="btn btn-primary" href="/login/">로그인</a> -->
         <a class="btn" href="/signup/">회원가입</a>
         <a class="btn btn-primary" href="/login/">로그인</a>
       </nav>
     </div>
-  </header>
-  
+</header>
+<script src="{% static 'js/app.js' %}"></script>
