@@ -1,4 +1,21 @@
-// 1. HTML 요소 가져오기
+// CSRF 토큰을 쿠키에서 가져오는 헬퍼 함수
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken'); // 변수 이름은 csrftoken
+
+// 1. HTML 요소 가져오기 
 const chatMessages = document.getElementById('chat-messages');
 const chatInput = document.getElementById('chat-input');
 const sendButton = document.getElementById('send-button');
@@ -6,7 +23,15 @@ const sendButton = document.getElementById('send-button');
 // 2. 페이지 로드 시 이전 대화 기록 불러오기
 window.addEventListener('load', async () => {
     try {
-        const response = await fetch('/api/chat-histories/activities/'); // GET 요청으로 히스토리 API 호출
+        // GET 요청에 headers와 CSRF 토큰 추가
+        const response = await fetch('/api/chat-histories/activities/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken 
+            }
+        }); 
+
         if (!response.ok) throw new Error('대화 기록을 불러오는 데 실패했습니다.');
         
         const histories = await response.json();
@@ -24,19 +49,17 @@ window.addEventListener('load', async () => {
 // 3. 메시지 전송 함수
 const sendMessage = async () => {
     const messageText = chatInput.value.trim();
-    if (messageText === '') return; // 입력 내용이 없으면 전송 안 함
+    if (messageText === '') return;
 
-    // 사용자 메시지를 화면에 먼저 표시
     addMessage('query', messageText);
     chatInput.value = '';
 
     try {
-        // 챗봇 API에 메시지 전송
         const response = await fetch('/api/activities_recommendation/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken // CSRF 토큰 추가
+                'X-CSRFToken': csrftoken
             },
             body: JSON.stringify({ message: messageText })
         });
@@ -46,10 +69,7 @@ const sendMessage = async () => {
         const data = await response.json();
         const botResponseText = data.response;
 
-        // 봇 응답을 화면에 표시
         addMessage('response', botResponseText);
-
-        // 대화 기록 저장 API 호출
         await saveHistory(messageText, botResponseText);
 
     } catch (error) {
@@ -65,7 +85,7 @@ const saveHistory = async (query, response) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken // CSRF 토큰 추가
+                'X-CSRFToken': csrftoken 
             },
             body: JSON.stringify({
                 query: query,
@@ -90,12 +110,11 @@ const addMessage = (sender, text) => {
     messageElement.appendChild(bubbleElement);
     chatMessages.appendChild(messageElement);
 
-    // 스크롤을 항상 맨 아래로 이동
     chatMessages.scrollTop = chatMessages.scrollHeight;
 };
 
 
-// 6. 이벤트 리스너 연결 (클릭 또는 Enter 키로 메시지 전송)
+// 6. 이벤트 리스너 연결
 sendButton.addEventListener('click', sendMessage);
 chatInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {

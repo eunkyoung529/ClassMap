@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from django.conf import settings
 
+
 # 챗폿 core 로직 import 
 from .core.retrieve import hybrid_search 
 from .core.llm_azure import render_with_llm 
@@ -77,5 +78,8 @@ def chatbot_api(request):
 # templates 프론트 UI
 from django.shortcuts import render
 
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+@ensure_csrf_cookie # CSRF 토큰 설정
 def chatbot_page(request):
     return render(request, 'recommendation_chatbot/chatbot.html')

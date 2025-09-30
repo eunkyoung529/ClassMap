@@ -137,8 +137,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 from datetime import timedelta
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': ( [
+        'rest_framework.authentication.SessionAuthentication', # 웹 브라우저에 쿠키가 저장되도록(세션인증)
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+
+    ]
     ),
     # 회원가입/로그인은 공개, 보호가 필요한 뷰는 개별로 IsAuthenticated를 사용
     'DEFAULT_PERMISSION_CLASSES': (
