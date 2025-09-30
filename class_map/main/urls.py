@@ -6,7 +6,7 @@ from .views import RegisterView, MeView
 from .auth_tokens import CustomTokenObtainPairView
 
 urlpatterns = [
-    path('search/', views.search_reviews, name='search_reviews'),
+    path('search/', views.LectureReviewSearchView.as_view(), name='lecture_review_search'),
 
     # 로그인/회원가입
     # path('auth/register/', views.RegisterView.as_view(), name='auth-register'),

@@ -21,3 +21,15 @@ document.getElementById('lecture-chatbot-card').addEventListener('click', () => 
         window.location.href = '/login/'; 
     }
 });
+
+
+document.getElementById('lecture-review-card').addEventListener('click', () => {
+    const accessToken = localStorage.getItem('access');
+    console.log("access token: ", accessToken);
+    if (accessToken) {
+        window.location.href = '/search/'; 
+    } else {
+        alert('로그인이 필요한 기능입니다.');
+        window.location.href = '/login/'; 
+    }
+});

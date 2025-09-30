@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.db.models import Q
 from .models import LectureReview, ActivityChatHistory, LectureChatHistory
-from .login import RegisterSerializer, ActivityChatHistorySerializer, LectureChatHistorySerializer
+from .login import RegisterSerializer, ActivityChatHistorySerializer, LectureChatHistorySerializer, LectureReviewSerializer
 from rest_framework import status
 from django.contrib.auth.models import User
 from rest_framework import generics, permissions
@@ -11,25 +11,28 @@ from rest_framework.response import Response
 
 
 # 에타 수강평 csv 검색 기능
-def search_reviews(request):
-    q = (request.GET.get('q', '')).strip() # 쿼리 파라미터에서 검색어 추출 및 공백 제거
-    if not q: # 빈 검색어 처리
-        return JsonResponse({"results": []}, status=400)
-    
-    # 제목에 검색어가 포함된 수강평 조회
-    qs = (LectureReview.objects 
-          .filter(title__icontains=q)
-          .values("title", "professor", "semester", "content"))
+class LectureReviewSearchView(APIView):
+    """
+    GET /api/reviews/search/?q=<검색어>
+    """
+    permission_classes = [permissions.IsAuthenticated]
 
-    return JsonResponse(
-        {"results": list(qs)},
-        json_dumps_params={"ensure_ascii": False} # 한글 깨짐 방지
-    )
+    def get(self, request):
+        q = request.query_params.get('q', '').strip()
 
+        if not q:
+            return Response({"results": []}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # 제목에 검색어가 포함된 수강평 조회
+        queryset = LectureReview.objects.filter(title__icontains=q)
+        
+        serializer = LectureReviewSerializer(queryset, many=True)
+
+        return Response({"results": serializer.data})
 
 #로그인/회원가입
 
-
+ 
 from .login import RegisterSerializer
 
 
@@ -129,3 +132,6 @@ def signup_page(request):
 def signup_pro_page(request):
     # Pro 회원가입 (UI만 다르고 호출은 동일)
     return render(request, 'main/signup_pro.html', context={'is_pro': True})
+
+def search_page(request):
+    return render(request, 'main/search.html')
