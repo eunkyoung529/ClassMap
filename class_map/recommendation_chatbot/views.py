@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from django.conf import settings
 
+
 # 챗폿 core 로직 import 
 from .core.retrieve import hybrid_search 
 from .core.llm_azure import render_with_llm 
@@ -25,7 +26,7 @@ except Exception as e:
 print("데이터 및 모델 로딩 완료.")
 
 # API 뷰 함수 정의
-@csrf_exempt # CSRF 보호 임시 비활성화
+@csrf_exempt
 def chatbot_api(request):
     if request.method != 'POST':
         return JsonResponse({'error': 'Only POST method is allowed'}, status=405)
@@ -71,3 +72,14 @@ def chatbot_api(request):
     except Exception as e:
         print(f"챗봇 처리 중 에러 발생: {e}")
         return JsonResponse({'error': 'An internal error occurred.'}, status=500)
+
+
+
+# templates 프론트 UI
+from django.shortcuts import render
+
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+@ensure_csrf_cookie # CSRF 토큰 설정
+def chatbot_page(request):
+    return render(request, 'recommendation_chatbot/chatbot.html')

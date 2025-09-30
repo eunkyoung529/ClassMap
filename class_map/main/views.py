@@ -8,7 +8,10 @@ from django.contrib.auth.models import User
 from rest_framework import generics, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.views.decorators.csrf import csrf_exempt
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt 
 
 
 
@@ -78,6 +81,7 @@ class MeView(APIView):
 
 
 # 공모전/대회 챗봇 히스토리 API 뷰
+#@method_decorator(csrf_exempt, name='dispatch')
 class ActivityChatHistoryView(APIView):
     permission_classes = [permissions.IsAuthenticated] # 토큰 인증
 
@@ -99,6 +103,7 @@ class ActivityChatHistoryView(APIView):
 
 
 # 강의 추천 챗봇 히스토리 API 뷰
+#@method_decorator(csrf_exempt, name='dispatch')
 class LectureChatHistoryView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 

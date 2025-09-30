@@ -99,3 +99,12 @@ def chatbot_api(request):
         print(f"강의 추천 챗봇 처리 중 에러 발생: {e}")
         traceback.print_exc() # 터미널에 상세 에러 출력
         return JsonResponse({'error': 'An internal error occurred.'}, status=500)
+    
+
+    
+
+# templates 프론트 UI
+from django.shortcuts import render
+
+def chatbot_page(request):
+    return render(request, 'recommendation_lecuture/chatbot.html')
