@@ -5,6 +5,7 @@ import json
 import os
 from django.conf import settings
 
+
 # 챗봇 핵심 로직 및 라이브러리 Import
 from .retriever.data_loader import load_chunks
 from .retriever.bm25 import build_bm25_index
@@ -94,6 +95,7 @@ def chatbot_api(request):
 
         return JsonResponse({'response': final_answer})
 
+
     except Exception as e:
         import traceback
         print(f"강의 추천 챗봇 처리 중 에러 발생: {e}")
@@ -105,6 +107,9 @@ def chatbot_api(request):
 
 # templates 프론트 UI
 from django.shortcuts import render
+from django.views.decorators.csrf import ensure_csrf_cookie
 
+
+@ensure_csrf_cookie # CSRF 토큰 설정
 def chatbot_page(request):
     return render(request, 'recommendation_lecuture/chatbot.html')

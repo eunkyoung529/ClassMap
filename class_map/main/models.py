@@ -61,7 +61,7 @@ class BaseChatHistory(models.Model):
 
     class Meta:
         abstract = True # 추상 모델 명시
-        ordering = ['-created_at'] # 최신순 정렬
+        #ordering = ['-created_at'] # 최신순 정렬
 
 # 공모전/대회 추천 챗봇 히스토리 모델
 class ActivityChatHistory(BaseChatHistory):
