@@ -4,32 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>맞춤 강의 추천 챗봇</title>
+    <title>강의 추천 챗봇</title>
     <link rel="stylesheet" href="{% static 'css/site.css' %}">
     <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
-
 </head>
 <body>
     {% include 'main/_header.html' %}
-    <div class="chat-container">
+    <div class="chat-container" id="chat-container" data-chatbot-type=CHATBOT_TYPE>
         <div class="chat-header">
-            <h2>맞춤 강의 추천 챗봇</h2>
+            <h2>강의 추천 챗봇</h2>
         </div>
-        <div class="chat-messages">
-            <div class="message bot">
-                <div class="bubble">안녕하세요! 어떤 분야의 강의를 추천해드릴까요?</div>
+        <div class="chat-messages" id="chat-messages">
             </div>
-            <div class="message user">
-                <div class="bubble">데이터 분석 관련 강의를 듣고 싶어요.</div>
-            </div>
-             <div class="message bot">
-                <div class="bubble">네, 데이터 분석 관련 강의 목록입니다.</div>
-            </div>
-        </div>
         <div class="chat-input">
-            <input type="text" placeholder="메시지를 입력하세요...">
-            <button>전송</button>
+            <input type="text" id="chat-input" placeholder="메시지를 입력하세요...">
+            <button id="send-button">전송</button>
         </div>
     </div>
+    <script>
+        const CHATBOT_TYPE = 'lectures'
+    </script>
+    <script defer src="{% static 'js/chatbot.js' %}"></script>
 </body>
 </html>

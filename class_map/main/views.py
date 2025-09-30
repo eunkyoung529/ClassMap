@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.db.models import Q
 from .models import LectureReview, ActivityChatHistory, LectureChatHistory
 from .login import RegisterSerializer, ActivityChatHistorySerializer, LectureChatHistorySerializer
@@ -8,15 +8,7 @@ from django.contrib.auth.models import User
 from rest_framework import generics, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.views.decorators.csrf import csrf_exempt
 
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt 
-
-
-
-def index(request):
-    return HttpResponse("This is the main index view.")
 
 # 에타 수강평 csv 검색 기능
 def search_reviews(request):

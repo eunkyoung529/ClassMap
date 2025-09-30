@@ -2,6 +2,12 @@
 const chatMessages = document.getElementById('chat-messages');
 const chatInput = document.getElementById('chat-input');
 const sendButton = document.getElementById('send-button');
+const chatContainer = document.getElementById('chat-container')
+
+
+const historyApiUrl = `/api/chat-histories/${CHATBOT_TYPE}/`; // 히스토리 api url
+const recommendApiUrl = `/api/${CHATBOT_TYPE}-recommendation/`; // 챗봇 추천 api url
+
 
 // 화면에 말풍선을 추가하고 스크롤을 내리는 함수
 const addMessage = (sender, text) => {
@@ -23,7 +29,7 @@ const saveHistory = async (query, response) => {
     if (!accessToken) return;
 
     try {
-        await fetch('/api/chat-histories/activities/', {
+        await fetch(historyApiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -51,7 +57,7 @@ const sendMessage = async () => {
     }
 
     try {
-        const response = await fetch('/api/activities-recommendation/', {
+        const response = await fetch(recommendApiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +92,7 @@ const loadInitialHistory = async () => {
     }
 
     try {
-        const response = await fetch('/api/chat-histories/activities/', {
+        const response = await fetch(historyApiUrl, {
             method: 'GET',
             headers: { 'Authorization': `Bearer ${accessToken}` }
         });

@@ -80,6 +80,7 @@ from django.shortcuts import render
 
 from django.views.decorators.csrf import ensure_csrf_cookie
 
+
 @ensure_csrf_cookie # CSRF 토큰 설정
 def chatbot_page(request):
     return render(request, 'recommendation_chatbot/chatbot.html')
