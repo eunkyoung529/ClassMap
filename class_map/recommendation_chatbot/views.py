@@ -26,7 +26,7 @@ except Exception as e:
 print("데이터 및 모델 로딩 완료.")
 
 # API 뷰 함수 정의
-@csrf_exempt # CSRF 보호 임시 비활성화
+@csrf_exempt
 def chatbot_api(request):
     if request.method != 'POST':
         return JsonResponse({'error': 'Only POST method is allowed'}, status=405)
