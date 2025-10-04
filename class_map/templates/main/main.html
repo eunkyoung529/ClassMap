@@ -35,9 +35,51 @@
           border: 1px solid rgba(255,255,255,0.6);       
           border-radius: 12px;
           padding: 20px;
+          transition: background-color 0.3s, border-color 0.3s, transform 0.3s; /*부드러운 효과*/
+          cursor: pointer;  /*마우스 커서 모양*/
+
+          /*콘텐츠를 수직 중앙 정렬하기 위해 flex 속성 추가*/
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          text-align: center;
+          min-height: 150px; /* 카드의 최소 높이를 지정해 크기 변화를 자연스럽게 */
         }
-        #features .card h3 { margin: 0 0 8px; color: var(--fg); }
-        #features .card p  { margin: 0; color: var(--muted); }
+
+        #features .card:hover {
+          background: rgba(255,255,255,0.1); 
+          border-color: rgba(255,255,255,1);
+          transform:translateY(-5px); 
+        }
+
+        /*제목(h3) 스타일*/
+        #features .card h3 { 
+          margin: 0; /* 평소에는 마진을 없애 완벽한 중앙 정렬을 도움 */ 
+          color: var(--fg); 
+          transition: margin 0.3s; /* 마진 값 변경을 부드럽게 */
+        }
+
+        /* 호버 시에만 제목(h3) 아래에 마진을 추가해 설명과 간격을 줌 */
+        #features .card:hover h3 {
+          margin-bottom: 8px;
+        }
+
+        /* 설명(p) 스타일: 평소에는 숨김 */
+        #features .card p {
+            margin: 0;
+            color: var(--muted);
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s 0.1s ease-out, max-height 0.4s 0.1s ease-out; /* 약간의 지연(delay) 추가 */
+            line-height: 1.6;
+        }
+
+        /* 카드에 마우스를 올렸을 때 설명(p) 스타일: 나타남 */
+        #features .card:hover p {
+            opacity: 1;
+            max-height: 100px;
+        }
       </style>
     
       <div class="inner">
