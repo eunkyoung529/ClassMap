@@ -1,0 +1,232 @@
+/* ========== 기본 ========== */
+:root {
+    --bg: #0d0d0f;       /* 전체 배경색 (매우 어두운 회색) */
+    --fg: #f8f8fb;       /* 기본 글자색 (밝은 회색) */
+    --muted: #b8b8c7;    /* 보조 글자색 (조금 더 어두운 회색) */
+    --brand: #7c3aed;    /* 브랜드 대표색 (보라색) */
+    --brand-2: #ec4899;   /* 브랜드 보조색 (핑크색) */
+    --brand-3: #10b981;  /* 에메랄드 */
+    --card: #16161a;     /* 카드 컴포넌트 배경색 */
+    --border:#23232a;;   /* 테두리 색 */
+}
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; color: var(--fg); background: var(--bg); }
+  
+  /* ========== 헤더 ========== */
+  .header {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(6px);
+    background: rgba(13,13,15,0.6);
+    border-bottom: 1px solid var(--border);
+  }
+  .header .wrap {
+    max-width: 1100px; margin: 0 auto; padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .header a.logo { color: #fff; font-weight: 800; text-decoration: none; font-size: 20px; letter-spacing: .2px; }
+  .header nav a {
+    color: var(--fg); text-decoration: none; margin-left: 16px; font-size: 14px;
+  }
+  .header nav a.btn {
+    padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--card);
+  }
+  .header nav a.btn-primary {
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    border: none; color: white;
+  }
+  
+  /* ========== 메인: 스크롤 스냅 ========== */
+  .snap-container {
+       scroll-snap-type: y mandatory;
+  }
+  .section {
+    min-height: unset;
+    display: grid; place-items: center;
+    padding: 100px 20px;
+    border-bottom: 1px solid var(--border);
+    scroll-snap-align: start;
+    background: linear-gradient(180deg, rgba(124,58,237,0.06), rgba(236,72,153,0.06) 60%, transparent);
+  }
+  .section .inner { max-width: 1100px; width: 100%; }
+  
+  .hero {
+    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px;
+    align-items: center;
+  }
+  .hero h1 { font-size: 52px; margin: 0 0 16px; }
+  .hero p { color: var(--muted); font-size: 18px; margin: 0 0 24px; line-height: 1.6; }
+  .hero img {
+    width: 100%; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,.35);
+    object-fit: cover;
+  }
+  
+  .features { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
+  .card h3 { margin: 0 0 8px; }
+  .card p { margin: 0; color: var(--muted); }
+  
+  .cta {
+    text-align: center;
+  }
+  .cta .btn {
+    display: inline-block; text-decoration: none; color: white; font-weight: 700;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    padding: 14px 20px; border-radius: 12px;
+  }
+  
+  /* ========== 폼 공통 ========== */
+  .page {
+    max-width: 420px; margin: 60px auto; padding: 24px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  }
+  .page h2 { margin: 0 0 12px; }
+  .page p.muted { margin-top: 6px; color: var(--muted); }
+  
+  .form .row { display: grid; gap: 6px; margin-bottom: 14px; }
+  .form label { font-size: 13px; color: var(--muted); }
+  .form input[type="text"], .form input[type="password"], .form input[type="email"] {
+    background: #111218; color: #e8e8f1; border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 12px; outline: none;
+  }
+  .form button {
+    width: 100%; padding: 12px; border-radius: 10px; border: none; color: #fff; font-weight: 700;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    cursor: pointer;
+  }
+  .form .hint { font-size: 12px; color: var(--muted); }
+  
+  /* 반응형 */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .features { grid-template-columns: 1fr; }
+  }
+  
+  /* 포인트 로그아웃 버튼*/
+.btn-accent {
+  background: linear-gradient(135deg, #ef4444, #f59e0b);
+  border: none; color: #fff;
+}
+
+/* === Global Buttons === */
+a.btn, .btn {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  transition: transform .15s ease, filter .15s ease;
+}
+a.btn:link,
+a.btn:visited {       
+  color: #fff;
+  text-decoration: none;
+}
+a.btn:hover, .btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  color: #fff;
+}
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--fg);
+}
+/* 이미 있던 정의 보강: 로그아웃용 강조 버튼 */
+.btn-accent {
+  background: linear-gradient(135deg, #ef4444, #f59e0b);
+  border: none; color: #fff;
+}
+
+
+/* 헤더의 로그아웃 버튼을 확실히 그라데이션으로 */
+.header nav a.btn.btn-accent {
+  background: linear-gradient(135deg, #ef4444, #f59e0b) !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+
+/* footer.html */
+/* ===== Footer  ===== */
+.footer {
+  background: #2f2f2f;          
+  border-top: 1px solid #3a3a3a;
+  padding: 48px 0 32px;         
+  scroll-snap-align: none; 
+}
+
+.footer .wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;            
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 120px;           
+}
+
+/* 아이콘 줄 */
+.footer .social {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;                  
+}
+
+/* 아이콘 크기 업 (원+SVG) */
+.footer a.icon {
+  width: 44px;                
+  height: 44px;
+  border-radius: 9999px;
+  background: #3a3a3a;
+  color: #cfcfd6;               
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform .15s ease, filter .15s ease, color .15s ease, background .15s ease;
+}
+.footer a.icon svg {
+  width: 20px;                  
+  height: 20px;
+  fill: currentColor;
+}
+
+/* 브랜드 호버 (원하면 유지/조정 가능) */
+.footer a.icon.kakao:hover     { color:#fee500; }
+.footer a.icon.github:hover    { color:#fff; }
+.footer a.icon.instagram:hover {
+  color:#fff;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+/* 카피 문구(오른쪽) */
+.footer .copy {
+  color: #e6e6e6;
+  font-size: 16px;              
+  line-height: 1;
+  white-space: nowrap;          
+  margin-left: auto;
+}
+
+@media (max-width: 900px) {
+  .footer .wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    min-height: unset;
+  }
+  .footer .copy { margin-left: 0; }
+}
+

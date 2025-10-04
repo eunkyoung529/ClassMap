@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}공모전/대외활동 추천 챗봇 - ClassMap+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="chat-container" id="chat-container" data-chatbot-type="activities">
+    <div class="chat-header">
+      <h2>공모전/대외활동 추천 챗봇</h2>
+    </div>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-input">
+      <input type="text" id="chat-input" placeholder="메시지를 입력하세요...">
+      <button id="send-button">전송</button>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // 전역 상수: chatbot.js에서 참조 가능
+  window.CHATBOT_TYPE = 'activities';
+  // data-attribute와 JS 상수 동기화(안전장치)
+  const cc = document.getElementById('chat-container');
+  if (cc && cc.dataset) cc.dataset.chatbotType = window.CHATBOT_TYPE;
+</script>
+<script defer src="{% static 'js/chatbot.js' %}"></script>
+{% endblock %}

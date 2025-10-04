@@ -1,0 +1,67 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.dist/
+.build/
+
+# --- 환경변수 ---
+.env
+*.env
+
+# --- 가상환경 ---
+.venv/
+venv/
+env/
+
+# --- OS / IDE ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Logs ---
+logs/
+*.log
+
+# --- recommendation_chatbot 데이터 ---
+recommendation_chatbot/data/vector_index/
+recommendation_chatbot/data/taxonomy/majors_jobs_map.json
+recommendation_chatbot/data/*.parquet
+recommendation_chatbot/data/*.sqlite
+recommendation_chatbot/data/*.db
+
+
+# recommendation_lecture 데이터
+recommendation_lecture/chroma_db/
+
+# SQLite3 데이터베이스 파일
+*.sqlite3
+
+# --- 실제 운영 데이터/키/자격증명 ---
+*.key
+*.pem
+*.crt
+*.p12
+*.json
+!.keep
+
+# --- 로컬 CSV ---
+*공모전_*.csv
+*대외활동_*.csv
+recommendation_chatbot/data/ratings.csv
+
+# Notebooks
+*.ipynb_checkpoints/
+
+# --- PDF 데이터 ---
+*.pdf
+강의계획서 자료/
+
+
+# collectstatic으로 생성되는 정적 파일 폴더
+staticfiles/
+# 사용자가 업로드하는 미디어 파일 폴더
+media/

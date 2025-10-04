@@ -1,0 +1,23 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}ClassMap+{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/site.css' %}?v=13">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  {% include 'main/_header.html' %}
+
+  {% block content %}{% endblock %}
+
+  {% include 'main/_footer.html' %}
+
+  <script defer src="{% static 'js/user.js' %}?v=10"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

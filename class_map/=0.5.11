@@ -1,0 +1,16 @@
+Collecting konlpy
+  Using cached konlpy-0.6.0-py2.py3-none-any.whl.metadata (1.9 kB)
+Collecting JPype1>=0.7.0 (from konlpy)
+  Using cached jpype1-1.6.0-cp310-cp310-win_amd64.whl.metadata (5.1 kB)
+Collecting lxml>=4.1.0 (from konlpy)
+  Using cached lxml-6.0.2-cp310-cp310-win_amd64.whl.metadata (3.7 kB)
+Requirement already satisfied: numpy>=1.6 in c:\users\eunkyoung\onedrive\비디오\바탕 화면\classmap\classmap\class_map\venv\lib\site-packages (from konlpy) (2.2.6)
+Requirement already satisfied: packaging in c:\users\eunkyoung\onedrive\비디오\바탕 화면\classmap\classmap\class_map\venv\lib\site-packages (from JPype1>=0.7.0->konlpy) (25.0)
+Downloading konlpy-0.6.0-py2.py3-none-any.whl (19.4 MB)
+   ---------------------------------------- 19.4/19.4 MB 5.2 MB/s  0:00:03
+Downloading jpype1-1.6.0-cp310-cp310-win_amd64.whl (356 kB)
+Downloading lxml-6.0.2-cp310-cp310-win_amd64.whl (4.0 MB)
+   ---------------------------------------- 4.0/4.0 MB 5.6 MB/s  0:00:00
+Installing collected packages: lxml, JPype1, konlpy
+
+Successfully installed JPype1-1.6.0 konlpy-0.6.0 lxml-6.0.2
