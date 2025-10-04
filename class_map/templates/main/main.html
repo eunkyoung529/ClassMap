@@ -116,20 +116,89 @@
     <!-- [3] Pricing -->
     <section class="section" id="pricing">
       <style>
-        #pricing .features {
-          display: flex;
-          gap: 20px;
-          align-items: stretch;
+                #pricing .features {
+            display: flex;
+            gap: 20px;
+            align-items: stretch; /* 각 카드의 높이를 동일하게 유지 */
+            text-align: left;
         }
+        
         #pricing .card {
-          border-radius: 12px;
-          padding: 20px;
-          flex: 1;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            flex: 1;
+
+            /* 1. 카드를 세로 방향 Flex 컨테이너로 설정 */
+            display: flex;
+            flex-direction: column;
         }
-        #pricing .card h3 { margin: 0 0 8px; color: var(--fg); }
-        #pricing .card .price { font-weight: 700; margin-top: 4px; color: var(--fg); }
-        #pricing .card-body p { margin: 6px 0; color: var(--muted); }
-        #pricing .card-header { margin-bottom: 10px; }
+
+        #pricing .card h3 {
+            margin: 0;
+            color: var(--fg);
+            font-size: 24px;
+        }
+
+        #pricing .card .price {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 4px;
+            color: var(--brand-2);
+        }
+
+        #pricing .card-header {
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        #pricing .card-body {
+            /* 2. 카드 내용(.card-body)이 남는 공간을 모두 차지하도록 설정 */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #pricing .card-body p {
+            margin: 8px 0;
+            color: var(--muted);
+        }
+        
+        /* 3. 버튼을 감싸는 p 태그에 margin-top: auto를 주어 가장 아래로 밀어냄 */
+        #pricing .card-body .btn-wrapper {
+            margin-top: auto;
+            padding-top: 20px; /* 기능 목록과 버튼 사이의 최소 간격 확보 */
+        }
+        
+        /* 버튼 공통 스타일 */
+        #pricing .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        
+        #pricing .btn:hover {
+            transform: scale(1.03);
+        }
+
+        /* 무료 플랜 버튼 */
+        #pricing .free-plan .btn {
+            background: #2b2b33;
+            color: var(--fg);
+        }
+
+        /* Pro 플랜 버튼 */
+        #pricing .pro-plan .btn {
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+            color: white;
+        }
       </style>
     
       <div class="inner">
@@ -143,7 +212,9 @@
             <div class="card-body">
               <p>✓ 하루 챗봇 질문 횟수 제한</p>
               <p>✓ 챗봇 질문 시, 답변 최대 3개</p>
-              <p><a class="btn" href="/signup/">무료로 시작</a></p>
+              <p class="btn-wrapper free-plan">
+                <a class="btn" href="/signup/">무료로 시작</a>
+              </p>
             </div>
           </div>
     
@@ -155,7 +226,9 @@
             <div class="card-body">
               <p>✓ 질문 무제한</p>
               <p>✓ Pro 인증 뱃지</p>
-              <p><a class="btn" href="/signup/pro/">Pro로 가입</a></p>
+              <p class="btn-wrapper pro-plan">
+                <a class="btn" href="/signup/pro/">Pro로 가입</a>
+              </p>
             </div>
           </div>
         </div>
