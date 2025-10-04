@@ -37,12 +37,17 @@
   }
   
   /* ========== 메인: 스크롤 스냅 ========== */
-  .snap-container {
-    height: calc(100vh - 56px); /* 헤더 높이 보정 */
+  /* .snap-container {
+    height: calc(100vh - 56px);
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
+  } */
+  .snap-container {
+       /* 컨테이너는 스크롤 안 함, 스냅만 담당 */
+       scroll-snap-type: y mandatory;
   }
   .section {
+    /* min-height: calc(100vh - 56px); */
     min-height: calc(100vh - 56px);
     display: grid; place-items: center;
     padding: 60px 20px;
@@ -154,3 +159,41 @@ a.btn:hover, .btn:hover {
   border: none !important;
   color: #fff !important;
 }
+
+
+/* footer.html */
+/* KakaoTalk / GitHub / Instagram brand hovers */
+.footer { scroll-snap-align: none; }
+
+.footer .icon.kakao:hover { color: #fee500; }   /* 카카오 노랑 */
+.footer .icon.github:hover { color: #ffffff; }  /* 깃허브 화이트 */
+.footer .icon.instagram:hover { 
+  /* 인스타 그러데이션 느낌 */
+  color: #fff; 
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+
+/* === Footer icon sizing hard-fix === */
+.footer .icon {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 9999px;
+  background: #2a2a2a;
+  display: grid;
+  place-items: center;
+  overflow: hidden;                 /* SVG가 커도 원 밖은 숨김 */
+}
+
+/* 아이콘 실제 크기(원 안에 딱 맞게) */
+.footer .icon svg {
+  width: 18px !important;           /* 필요하면 16~20px로 조절 */
+  height: 18px !important;
+  display: block;
+  flex: 0 0 auto;
+  fill: currentColor;               /* hover 색상 변경과 연동 */
+}
+
+/* 혹시 전역 svg 스타일이 있으면 무력화 */
+.footer svg { max-width: none !important; }
+
