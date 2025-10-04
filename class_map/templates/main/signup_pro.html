@@ -1,15 +1,9 @@
+{% extends 'main/base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pro 가입 - ClassMap+</title>
-  <link rel="stylesheet" href="{% static 'css/site.css' %}">
-</head>
-<body>
-  {% include 'main/_header.html' %}
 
+{% block title %}Pro 가입 - ClassMap+{% endblock %}
+
+{% block content %}
   <div class="page">
     <h2>Pro 회원가입</h2>
     <p class="muted">Pro는 추천 무제한 + Pro 뱃지가 제공됩니다. 지금은 계정만 만들고, 결제 후 자동 승급됩니다.</p>
@@ -40,7 +34,9 @@
       <div id="signupProMsg" class="hint"></div>
     </form>
   </div>
+{% endblock %}
 
+{% block extra_js %}
 <script>
 const form = document.getElementById('signupProForm');
 const msg = document.getElementById('signupProMsg');
@@ -70,6 +66,4 @@ form.addEventListener('submit', async (e) => {
   }
 });
 </script>
-
-</body>
-</html>
+{% endblock %}
