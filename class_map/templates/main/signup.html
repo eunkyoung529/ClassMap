@@ -1,15 +1,9 @@
+{% extends 'main/base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>회원가입 - ClassMap+</title>
-  <link rel="stylesheet" href="{% static 'css/site.css' %}">
-</head>
-<body>
-  {% include 'main/_header.html' %}
 
+{% block title %}회원가입 - ClassMap+{% endblock %}
+
+{% block content %}
   <div class="page">
     <h2>회원가입 (일반)</h2>
     <p class="muted"></p>
@@ -40,7 +34,9 @@
       <div id="signupMsg" class="hint"></div>
     </form>
   </div>
+{% endblock %}
 
+{% block extra_js %}
 <script>
 const form = document.getElementById('signupForm');
 const msg = document.getElementById('signupMsg');
@@ -72,6 +68,4 @@ form.addEventListener('submit', async (e) => {
   }
 });
 </script>
-
-</body>
-</html>
+{% endblock %}
