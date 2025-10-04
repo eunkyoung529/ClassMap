@@ -1,15 +1,9 @@
+{% extends 'main/base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>로그인 - ClassMap+</title>
-  <link rel="stylesheet" href="{% static 'css/site.css' %}">
-</head>
-<body>
-  {% include 'main/_header.html' %}
 
+{% block title %}로그인 - ClassMap+{% endblock %}
+
+{% block content %}
   <div class="page">
     <h2>로그인</h2>
     <p class="muted">아이디와 비밀번호를 입력하세요.</p>
@@ -28,7 +22,9 @@
       <div id="loginMsg" class="hint"></div>
     </form>
   </div>
+{% endblock %}
 
+{% block extra_js %}
 <script>
 const form = document.getElementById('loginForm');
 const msg = document.getElementById('loginMsg');
@@ -48,17 +44,15 @@ form.addEventListener('submit', async (e) => {
     const data = await res.json();
     if (!res.ok) throw new Error(data.detail || '로그인 실패');
 
-    // 토큰 저장
     localStorage.setItem('access', data.access);
     localStorage.setItem('refresh', data.refresh);
     localStorage.setItem('username', data.username);
     localStorage.setItem('plan', data.plan);
-    // 메인으로 이동
+
     location.href = '/';
   } catch (err) {
     msg.textContent = err.message;
   }
 });
 </script>
-</body>
-</html>
+{% endblock %}
