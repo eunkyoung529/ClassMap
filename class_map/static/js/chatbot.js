@@ -16,7 +16,7 @@ const addMessage = (sender, text) => {
 
     const bubbleElement = document.createElement('div');
     bubbleElement.classList.add('bubble');
-    bubbleElement.textContent = text;
+    bubbleElement.innerHTML = text;
 
     messageElement.appendChild(bubbleElement);
     chatMessages.appendChild(messageElement);

@@ -92,7 +92,8 @@ def chatbot_api(request):
         client = create_azure_client()
         deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT") # .env 파일에 정의
         final_answer = generate_answer(user_message, parent_hits, deployment_name, client)
-
+        # print(repr(final_answer))
+        final_answer = final_answer.replace('\n', '<br>')
         return JsonResponse({'response': final_answer})
 
 

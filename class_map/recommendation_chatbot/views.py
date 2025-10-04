@@ -66,6 +66,7 @@ def chatbot_api(request):
             famous=famous_item,
             prefs=preferences
         )
+        final_response = final_response.replace('\n', '<br>')
 
         return JsonResponse({'response': final_response})
 
