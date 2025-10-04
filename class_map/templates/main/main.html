@@ -32,8 +32,6 @@
       <style>
         #features .features { gap: 20px; }               
         #features .card {
-          background: transparent;                       
-          border: 1px solid rgba(255,255,255,0.6);       
           border-radius: 12px;
           padding: 20px;
           transition: background-color 0.3s, border-color 0.3s, transform 0.3s; /*부드러운 효과*/
@@ -44,13 +42,26 @@
           flex-direction: column;
           justify-content: center;
           text-align: center;
-          min-height: 150px; /* 카드의 최소 높이를 지정해 크기 변화를 자연스럽게 */
+          min-height: 200px; /* 카드의 최소 높이를 지정해 크기 변화를 자연스럽게 */
         }
 
         #features .card:hover {
-          background: rgba(255,255,255,0.1); 
-          border-color: rgba(255,255,255,1);
           transform:translateY(-5px); 
+        }
+
+        
+        /* 카드별로 다른 색상의 빛나는 효과 적용 */
+        #features .card:nth-child(1):hover {
+            border-color: var(--brand);
+            box-shadow: 0 10px 40px -10px var(--brand);
+        }
+        #features .card:nth-child(2):hover {
+            border-color: var(--brand-2);
+            box-shadow: 0 10px 40px -10px var(--brand-2);
+        }
+        #features .card:nth-child(3):hover {
+            border-color: var(--brand-3);
+            box-shadow: 0 10px 40px -10px var(--brand-3);
         }
 
         /*제목(h3) 스타일*/
@@ -111,8 +122,6 @@
           align-items: stretch;
         }
         #pricing .card {
-          background: transparent;      
-          border: 1px solid rgba(255,255,255,0.6); 
           border-radius: 12px;
           padding: 20px;
           flex: 1;
