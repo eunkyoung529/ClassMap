@@ -220,7 +220,6 @@ a.btn:hover, .btn:hover {
   margin-left: auto;
 }
 
-/* 모바일*/
 @media (max-width: 900px) {
   .footer .wrap {
     flex-direction: column;
