@@ -5,7 +5,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ClassMap+</title>
-  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <!-- <link rel="stylesheet" href="{% static 'css/site.css' %}"> -->
+  <link rel="stylesheet" href="{% static 'css/site.css' %}?v=3">
 </head>
 <body>
   {% include 'main/_header.html' %}
@@ -98,7 +99,7 @@
           <div class="card">
             <div class="card-header pro-plan">
               <h3>Pro</h3>
-              <p class="price">월 평균 10,000원</p>
+              <p class="price">월 10,000원</p>
             </div>
             <div class="card-body">
               <p>✓ 질문 무제한</p>
@@ -122,6 +123,7 @@
         </p>
       </div>
     </section>
+
   </div>
   <script defer src="{% static 'js/main.js' %}"></script>
 </body>
