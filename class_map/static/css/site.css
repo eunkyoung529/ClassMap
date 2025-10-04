@@ -39,11 +39,11 @@
   
   /* ========== 메인: 스크롤 스냅 ========== */
   .snap-container {
-    height: calc(100vh - 56px); /* 헤더 높이 보정 */
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
+       /* 컨테이너는 스크롤 안 함, 스냅만 담당 */
+       scroll-snap-type: y mandatory;
   }
   .section {
+    /* min-height: calc(100vh - 56px); */
     min-height: calc(100vh - 56px);
     display: grid; place-items: center;
     padding: 60px 20px;
@@ -155,3 +155,81 @@ a.btn:hover, .btn:hover {
   border: none !important;
   color: #fff !important;
 }
+
+
+/* footer.html */
+/* ===== Footer  ===== */
+.footer {
+  background: #2f2f2f;          /* 진한 회색 */
+  border-top: 1px solid #3a3a3a;
+  padding: 48px 0 32px;         /* ↑ 위아래 패딩 크게 */
+  scroll-snap-align: none;      /* 스냅 섹션과 충돌 방지 */
+}
+
+.footer .wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;              /* 좌우 여백 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 120px;            /* 네모칸 자체 높이 보장 */
+}
+
+/* 아이콘 줄 */
+.footer .social {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;                    /* 아이콘 간격 ↑ */
+}
+
+/* 아이콘 크기 업 (원+SVG) */
+.footer a.icon {
+  width: 44px;                  /* 36 → 44 */
+  height: 44px;
+  border-radius: 9999px;
+  background: #3a3a3a;
+  color: #cfcfd6;               /* 기본 회색(= SVG 색) */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform .15s ease, filter .15s ease, color .15s ease, background .15s ease;
+}
+.footer a.icon svg {
+  width: 20px;                  /* 18 → 20 */
+  height: 20px;
+  fill: currentColor;
+}
+
+/* 브랜드 호버 (원하면 유지/조정 가능) */
+.footer a.icon.kakao:hover     { color:#fee500; }
+.footer a.icon.github:hover    { color:#fff; }
+.footer a.icon.instagram:hover {
+  color:#fff;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+/* 카피 문구(오른쪽) */
+.footer .copy {
+  color: #e6e6e6;
+  font-size: 16px;              /* 가독성 ↑ */
+  line-height: 1;
+  white-space: nowrap;          /* 줄바꿈 방지 */
+  margin-left: auto;
+}
+
+/* 모바일에서 살짝 압축 */
+@media (max-width: 900px) {
+  .footer .wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    min-height: unset;
+  }
+  .footer .copy { margin-left: 0; }
+}
+
